@@ -35,7 +35,8 @@ class GCN(GNN):
         # applying a classifier
         # x = F.dropout(h, p=0.2)
         x = self.fc_layers(h)
-        return F.log_softmax(x, dim=1), h
+        return x
+        #return F.log_softmax(x, dim=1), h
     
 
 class GAT(GNN):
@@ -49,7 +50,8 @@ class GAT(GNN):
         x = F.relu(x)
         x = self.conv2(x, edge_index)
         
-        return F.log_softmax(x, dim=1)
+        return x    
+        #return F.log_softmax(x, dim=1)
     
 class GIN(GNN):
     def __init__(self, in_channels, hidden_channels, out_channels):
@@ -74,7 +76,8 @@ class GIN(GNN):
         # applying a classifier
         # x = F.dropout(h, p=0.2)
         x = self.fc_layers(h)
-        return F.log_softmax(x, dim=1), h
+        #return F.log_softmax(x, dim=1), h
+        return x
     
 
 class GraphSAGE(GNN):
@@ -100,4 +103,5 @@ class GraphSAGE(GNN):
         # applying a classifier
         # x = F.dropout(h, p=0.2)
         x = self.fc_layers(h)
-        return F.log_softmax(x, dim=1), h
+        #return F.log_softmax(x, dim=1), h
+        return x
