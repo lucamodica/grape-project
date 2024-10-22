@@ -27,15 +27,14 @@ class GCN(GNN):
     def forward(self, x, edge_index):
         # node emebdding creation (embedding = h)
         h = self.conv1(x, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv2(h, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv3(h, edge_index)
 
         # applying a classifier
-        # x = F.dropout(h, p=0.2)
-        x = self.fc_layers(h)
-        return x
+        x = h
+        return x, h
         #return F.log_softmax(x, dim=1), h
     
 
@@ -50,7 +49,7 @@ class GAT(GNN):
         x = F.relu(x)
         x = self.conv2(x, edge_index)
         
-        return x    
+        return x, x
         #return F.log_softmax(x, dim=1)
     
 class GIN(GNN):
@@ -68,16 +67,16 @@ class GIN(GNN):
     def forward(self, x, edge_index):
         # node emebdding creation (embedding = h)
         h = self.conv1(x, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv2(h, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv3(h, edge_index)
 
         # applying a classifier
         # x = F.dropout(h, p=0.2)
         x = self.fc_layers(h)
         #return F.log_softmax(x, dim=1), h
-        return x
+        return x, h
     
 
 class GraphSAGE(GNN):
@@ -95,13 +94,13 @@ class GraphSAGE(GNN):
     def forward(self, x, edge_index):
         # node emebdding creation (embedding = h)
         h = self.conv1(x, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv2(h, edge_index)
-        h = h.relu()
+        h = F.relu(h)
         h = self.conv3(h, edge_index)
 
         # applying a classifier
         # x = F.dropout(h, p=0.2)
         x = self.fc_layers(h)
         #return F.log_softmax(x, dim=1), h
-        return x
+        return x, h
