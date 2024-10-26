@@ -132,13 +132,13 @@ class GraphSAGE(GNN):
 
         # Jumping Knowledge Network
         self.jump_knowledge = JumpingKnowledge(
-            mode='lstm', channels=out_channels, num_layers=3)
+            mode='lstm', channels=hidden_channels, num_layers=3)
 
-        # self.fc_layers = nn.Sequential(
-        #     nn.Linear(hidden_channels * 3, hidden_channels),
-        #     nn.ReLU(),
-        #     nn.Linear(hidden_channels, out_channels)
-        # )
+        self.fc_layers = nn.Sequential(
+            nn.Linear(hidden_channels, hidden_channels),
+            # nn.ReLU(),
+            # nn.Linear(hidden_channels, out_channels)
+        )
 
     def forward(self, x, edge_index):
         # First layer (mean aggregation)
@@ -156,6 +156,7 @@ class GraphSAGE(GNN):
         h = self.jump_knowledge([h1, h2, h3])
 
         # Apply classifier
-        # x = self.fc_layers(h)
+        x = self.fc_layers(h)
+        # print(h.shape)
         x = h
         return x, h
