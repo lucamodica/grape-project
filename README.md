@@ -1,2 +1,2 @@
-# deep-gnn-project
-repo for the deep machine learning project. It will be about Graph Neural Networks applied to a Reddit posts dataset.
+# grape-project
+Graph-based Representation and Analysis of Product Embeddings (GRAPE): a Comparative Analysis of Node Classification on the AmazonCo-Purchasing Graph Using GNN Architectures and Baseline Models
